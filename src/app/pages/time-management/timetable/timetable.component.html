@@ -1,0 +1,89 @@
+<h1 class="bg-slate-200 py-4 rounded flex justify-between items-center">
+    <span class="text-2xl font-semibold">
+        <fa-icon [icon]="calendarIcon"></fa-icon> Emploi du temps
+    </span>
+    <span>
+        <fa-icon [icon]="faLaptop"></fa-icon> Dashboard
+        <span class="opacity-80"> / Emploi du temps</span>
+    </span>
+</h1>
+
+<div class="border-2 border-slate-300 mb-[25px] rounded-full"></div>
+
+<div class="flex flex-wrap justify-center items-center gap-4 mb-[25px]">
+    <select
+        class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5 w-52">
+        <option value="">Sélectionner le niveau</option>
+        <option value="L1">L1</option>
+        <option value="L2">L2</option>
+        <option value="L3">L3</option>
+        <option value="M1">M1</option>
+        <option value="M2">M2</option>
+    </select>
+    <select
+        class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5 w-52">
+        <option value="">Sélectionner la classe</option>
+        <option value="L1">LIAGE1</option>
+        <option value="L2">LIAGE2</option>
+        <option value="L3">LIAGE3</option>
+        <option value="M1">MIAGE1</option>
+        <option value="M2">MIAGE2</option>
+    </select>
+    <button
+        class="flex justify-center items-center px-5 py-2.5 bg-yellow-400 opacity-90 rounded-full hover:cursor-pointer hover:opacity-100 font-medium shadow-2xl transition-all">
+        <fa-icon [icon]="showIcon"></fa-icon>
+        <span class="ml-2">Afficher l'emploi du temps</span>
+    </button>
+</div>
+
+<div class="w-full grid md:grid-cols-4 sm:grid-cols-1 gap-4">
+    <div class="bg-slate-100 shadow rounded p-4">
+        <div class="p-4 shadow-lg bg-white rounded">
+            <div>
+                <h3 class="text-lg uppercase">Matières</h3>
+            </div>
+            <div class="border border-gray-300"></div>
+            <div
+                class="mt-4 flex flex-col gap-2 h-40 scrollbar-thin scrollbar-thumb-yellow-500 scrollbar-track-yellow-300 overflow-y-scroll hover:cursor-grab">
+                <div *ngFor="let subject of subjects" [class]="subject.background"
+                    class="p-2 rounded mr-3">
+                    {{ subject.name }}
+                </div>
+            </div>
+        </div>
+        <div class="p-4 mt-6 shadow-lg rounded bg-white">
+            <div>
+                <h3 class="text-lg uppercase">Créer une matière</h3>
+            </div>
+            <div class="border border-gray-300"></div>
+            <div class="mt-4">
+                <div class="flex flex-wrap justify-between gap-2 items-center">
+                    <div (click)="onGetBg('bg-green-600')" class="h-8 w-8 bg-green-600 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-yellow-300 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-orange-700 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-pink-400 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-purple-400 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-blue-400 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-green-400 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-orange-400 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-yellow-500 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-pink-400 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-purple-600 rounded hover:rotate-45 transition-all"></div>
+                    <div class="h-8 w-8 bg-blue-600 rounded hover:rotate-45 transition-all"></div>
+                </div>
+                <div class="flex mt-4">
+                    <input type="text" id="website-admin"
+                        class="rounded-none rounded-l-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 block flex-1 min-w-0 w-full text-sm placeholder:text-xs p-2.5"
+                        placeholder="Nom matière" />
+                    <span
+                        class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-r-lg border border-r-0 border-gray-300">
+                        <fa-icon [icon]="addIcon" class=""></fa-icon>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md:col-span-3 sm:col-span-1">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+</div>

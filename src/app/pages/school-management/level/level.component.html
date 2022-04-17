@@ -1,0 +1,141 @@
+<h1 class="bg-slate-200 py-4 rounded flex justify-between items-center">
+    <span class="text-2xl font-semibold">
+        <fa-icon [icon]="levelIcon"></fa-icon> Niveaux
+    </span>
+    <span>
+        <fa-icon [icon]="faLaptop"></fa-icon> Dashboard
+        <span class="opacity-80"> / Niveaux</span>
+    </span>
+</h1>
+
+<div class="border-2 border-slate-300 mb-[25px] rounded-full"></div>
+
+<div>
+    <button class="px-5 py-4 bg-yellow-400 opacity-90 rounded-full hover:cursor-pointer hover:opacity-100 font-medium shadow-2xl transition-all">
+        <fa-icon [icon]="addIcon"></fa-icon> Ajouter un niveau
+    </button>
+</div>
+
+<div class="relative overflow-x-auto mt-[25px] pt-2 px-2">
+    <div class="flex justify-between">
+        <div class="flex gap-2 items-center mb-4">
+            <span>Afficher</span>
+            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5 w-16">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <span>éléments</span>
+        </div>
+        <div>
+            <span>Rechercher : </span>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5">
+        </div>
+    </div>
+    <table class="w-full text-sm text-left shadow-md text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3">Niveau</th>
+                <th scope="col" class="px-6 py-3">Désignation</th>
+                <th scope="col" class="px-6 py-3">Cycle</th>
+                <th scope="col" class="px-6 py-3">Classes</th>
+                <th scope="col" class="px-6 py-3">Etudiants du niveau</th>
+                <th scope="col" class="px-6 py-3 text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4">L1</td>
+                <td class="px-6 py-4">Droit public</td>
+                <td class="px-6 py-4">Cycle 1</td>
+                <td class="px-6 py-4">
+                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
+                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
+                </td>
+                <td class="px-6 py-4">50</td>
+                <td class="px-6 py-4 flex gap-4 justify-center">
+                    <button class="text-blue-500 text-xl" title="Modifier">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                    <button class="text-red-500 text-xl" title="Supprimer">
+                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4">L1</td>
+                <td class="px-6 py-4">Droit public</td>
+                <td class="px-6 py-4">Cycle 1</td>
+                <td class="px-6 py-4">
+                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
+                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
+                </td>
+                <td class="px-6 py-4">50</td>
+                <td class="px-6 py-4 flex gap-4 justify-center">
+                    <button class="text-blue-500 text-xl" title="Modifier">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                    <button class="text-red-500 text-xl" title="Supprimer">
+                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4">L1</td>
+                <td class="px-6 py-4">Droit public</td>
+                <td class="px-6 py-4">Cycle 1</td>
+                <td class="px-6 py-4">
+                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
+                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
+                </td>
+                <td class="px-6 py-4">50</td>
+                <td class="px-6 py-4 flex gap-4 justify-center">
+                    <button class="text-blue-500 text-xl" title="Modifier">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                    <button class="text-red-500 text-xl" title="Supprimer">
+                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4">L1</td>
+                <td class="px-6 py-4">Droit public</td>
+                <td class="px-6 py-4">Cycle 1</td>
+                <td class="px-6 py-4">
+                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
+                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
+                </td>
+                <td class="px-6 py-4">50</td>
+                <td class="px-6 py-4 flex gap-4 justify-center">
+                    <button class="text-blue-500 text-xl" title="Modifier">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                    <button class="text-red-500 text-xl" title="Supprimer">
+                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4">L1</td>
+                <td class="px-6 py-4">Droit public</td>
+                <td class="px-6 py-4">Cycle 1</td>
+                <td class="px-6 py-4">
+                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
+                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
+                </td>
+                <td class="px-6 py-4">50</td>
+                <td class="px-6 py-4 flex gap-4 justify-center">
+                    <button class="text-blue-500 text-xl" title="Modifier">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                    <button class="text-red-500 text-xl" title="Supprimer">
+                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
