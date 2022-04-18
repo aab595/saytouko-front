@@ -72,7 +72,7 @@ export class TimetableComponent {
   ];
 
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridDay',
+    initialView: 'timeGridWeek',
     locale: 'fr',
     firstDay: 1,
     headerToolbar: {

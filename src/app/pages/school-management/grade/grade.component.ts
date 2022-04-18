@@ -7,6 +7,8 @@ import {
   faStar,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
+import { GradeService } from 'src/app/core/services/grade.service';
 
 @Component({
   selector: 'app-grade',
@@ -20,8 +22,12 @@ export class GradeComponent implements OnInit {
   calendarIcon = faCalendarAlt;
   editIcon = faEdit;
   deleteIcon = faTrash;
+  grades$!: Observable<any>;
 
-  constructor() {}
+  constructor(private gradeService: GradeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.grades$ = this.gradeService.getAllGrade();
+    this.grades$.subscribe((res) => console.log(res));
+  }
 }
