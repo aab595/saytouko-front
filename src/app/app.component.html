@@ -1,31 +1,50 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null">
+<nz-layout>
+  <nz-sider
+    nzCollapsible
+    nzWidth="250px"
+    nzBreakpoint="lg"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+    class="fixed h-full overflow-y-auto scrollbar-thin scrollbar-track-yellow-100 scrollbar-thumb-yellow-300 hover:scrollbar-thumb-yellow-500"
+  >
     <div class="flex justify-center items-center mt-4">
       <a routerLink="/dashboard">
-        <img src="assets/logo.png" alt="logo" />
+        <img src="assets/logo.png" alt="saytouko-logo" />
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Tableau de bord" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item>
-            <a routerLink="/dashboard" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
-          </li>
-        </ul>
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-menu-item>
+        <i nz-icon nzType="dashboard"></i>
+        <span>
+          <a
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [state]="{ id: 1, name: 'Angular' }"
+            >Tableau de bord</a
+          >
+        </span>
       </li>
       <li nz-submenu nzTitle="Gestion de l'école" nzIcon="read">
         <ul>
           <li nz-menu-item *ngFor="let link of schoolManagementLinks">
-            <a [routerLink]="link.route" routerLinkActive="active">{{ link.label }}</a>
+            <a [routerLink]="link.route" routerLinkActive="active">{{
+              link.label
+            }}</a>
           </li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Gestion du temps" nzIcon="calendar">
         <ul>
           <li nz-menu-item *ngFor="let link of timeManagementLinks">
-            <a [routerLink]="link.route" routerLinkActive="active">{{ link.label }}</a>
+            <a [routerLink]="link.route" routerLinkActive="active">{{
+              link.label
+            }}</a>
           </li>
         </ul>
       </li>
@@ -41,18 +60,51 @@
       </li>
     </ul>
   </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-        </span>
-      </div>
+  <nz-layout [ngClass]="isCollapsed ? 'expend-sm' : 'expend-lg'">
+    <nz-header class="bg-white p-0 cursor-pointer transition-colors">
+      <i
+        class="text-xl pl-4 text-gray-600 hover:text-black transition-all"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></i>
     </nz-header>
-    <nz-content>
-      <div class="bg-slate-200 p-6 h-full overflow-y-scroll">
+    <nz-content class="mx-4">
+      <nz-breadcrumb
+        class="my-4 bg-yellow-400 py-2 px-4 flex flex-wrap gap-4 justify-between items-center rounded"
+      >
+        <div class="text-gray-700 text-2xl font-medium">
+          <fa-icon [icon]="icone"></fa-icon> {{ title }}
+        </div>
+        <div class="text-gray-600">
+          <nz-breadcrumb-item
+            class="font-medium cursor-pointer"
+            routerLink="/dashboard"
+          >
+            <fa-icon [icon]="faLaptop"></fa-icon>
+            Tableau de bord
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item
+            class="opacity-80"
+            *ngIf="title == 'Tableau de bord'"
+          >
+            Accueil
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item
+            class="opacity-80"
+            *ngIf="title !== 'Tableau de bord'"
+          >
+            {{ title }}
+          </nz-breadcrumb-item>
+        </div>
+      </nz-breadcrumb>
+      <div class="p-6 bg-white min-h-[360px]">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
+    <nz-footer class="text-center opacity-95 font-medium"
+      >Saytouko &copy; 2022 | Tous droits réservés | Conçu par
+      <strong>AAB</strong></nz-footer
+    >
   </nz-layout>
 </nz-layout>

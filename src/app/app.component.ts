@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  title!: string;
+  icone!: IconProp;
   isCollapsed = false;
+  faLaptop = faLaptop
 
   schoolManagementLinks = [
     {
@@ -33,8 +40,12 @@ export class AppComponent {
       route: '/school-management/parent',
       label: 'Parent',
     },
+    {
+      route: '/school-management/teacher',
+      label: 'Enseignant',
+    },
   ];
-  
+
   timeManagementLinks = [
     {
       route: '/time-management/timetable',
@@ -53,4 +64,23 @@ export class AppComponent {
       label: 'Congés',
     },
   ];
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private titleService: Title
+  ) {}
+
+  ngOnInit(): void {
+    this.router.events.forEach((e) => {
+      if (e instanceof NavigationEnd) {
+        this.route.root.children.map((infos) => {
+          infos.snapshot.children.map((response) => {
+            this.icone = response.data['icon'];
+            this.title = response.data['title'];
+          });
+        });
+      }
+    });
+  }
 }

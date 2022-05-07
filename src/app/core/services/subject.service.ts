@@ -5,16 +5,16 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class GradeService {
-  private _baseUrl = 'http://localhost:3000/api/classe';
+export class SubjectService {
+  private _baseUrl = 'http://localhost:3000/api/matiere';
 
   constructor(private http: HttpClient) {}
 
-  public getAllGrade(): Observable<any> {
+  public getAllSubject(): Observable<any> {
     return this.http.get(this._baseUrl);
   }
 
-  public addNewGrade(formData: any): Observable<any> {
+  public addNewSubject(formData: any): Observable<any> {
     return this.http.post(this._baseUrl, { ...formData });
   }
 }

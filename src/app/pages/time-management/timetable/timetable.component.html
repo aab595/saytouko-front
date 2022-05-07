@@ -1,16 +1,4 @@
-<h1 class="bg-slate-200 py-4 rounded flex justify-between items-center">
-    <span class="text-2xl font-semibold">
-        <fa-icon [icon]="calendarIcon"></fa-icon> Emploi du temps
-    </span>
-    <span>
-        <fa-icon [icon]="faLaptop"></fa-icon> Dashboard
-        <span class="opacity-80"> / Emploi du temps</span>
-    </span>
-</h1>
-
-<div class="border-2 border-slate-300 mb-[25px] rounded-full"></div>
-
-<div class="flex flex-wrap justify-center items-center gap-4 mb-[25px]">
+<div class="flex flex-wrap justify-center items-center gap-4 mb-8">
     <select
         class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5 w-52">
         <option value="">Sélectionner le niveau</option>
@@ -31,27 +19,30 @@
     </select>
     <button
         class="flex justify-center items-center px-5 py-2.5 bg-yellow-400 opacity-90 rounded-full hover:cursor-pointer hover:opacity-100 font-medium shadow-2xl transition-all">
-        <fa-icon [icon]="showIcon"></fa-icon>
+        <!-- <fa-icon [icon]="showIcon"></fa-icon> -->
         <span class="ml-2">Afficher l'emploi du temps</span>
     </button>
 </div>
 
-<div class="w-full grid md:grid-cols-4 sm:grid-cols-1 gap-4">
-    <div class="bg-slate-100 shadow rounded p-4">
-        <div class="p-4 shadow-lg bg-white rounded">
+<div class="w-full grid gap-4">
+    <div class="md:px-10 sm:px-0">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+    <!-- <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-10 mt-4">
+        <div class="p-4 shadow-lg bg-gray-50 rounded">
             <div>
                 <h3 class="text-lg uppercase">Matières</h3>
             </div>
             <div class="border border-gray-300"></div>
             <div
-                class="mt-4 flex flex-col gap-2 h-40 scrollbar-thin scrollbar-thumb-yellow-500 scrollbar-track-yellow-300 overflow-y-scroll hover:cursor-grab">
+                class="mt-4 flex flex-col gap-2 h-36 scrollbar scrollbar-thumb-yellow-500 scrollbar-track-yellow-300 overflow-y-scroll hover:cursor-grab">
                 <div *ngFor="let subject of subjects" [class]="subject.background"
-                    class="p-2 rounded mr-3">
+                    class="p-2 rounded mr-6">
                     {{ subject.name }}
                 </div>
             </div>
         </div>
-        <div class="p-4 mt-6 shadow-lg rounded bg-white">
+        <div class="p-4 shadow-lg rounded bg-gray-50">
             <div>
                 <h3 class="text-lg uppercase">Créer une matière</h3>
             </div>
@@ -77,13 +68,71 @@
                         placeholder="Nom matière" />
                     <span
                         class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-r-lg border border-r-0 border-gray-300">
-                        <fa-icon [icon]="addIcon" class=""></fa-icon>
+                        <fa-icon [icon]="faAdd" class=""></fa-icon>
                     </span>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="md:col-span-3 sm:col-span-1">
-        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div> -->
+</div>
+
+<!-- DISPLAY EVENT MODAL -->
+<div *ngIf="toggleModal" class="bg-black bg-opacity-75 h-[100vh] flex justify-center items-center overflow-x-hidden fixed z-[1000] w-full inset-0 md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-auto">
+        <div class="relative bg-white rounded-lg shadow">
+            <!-- Header -->
+            <div class="flex justify-between items-start p-5 rounded-t border-b">
+                <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
+                    Ajouter un crénau
+                </h3>
+                <button type="button" (click)="onToggleModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <!-- Body -->
+            <form nz-form [formGroup]="timetableForm">
+                <div class="p-6 space-y-6 h-56 overflow-y-auto scrollbar-thin scrollbar-track-yellow-100 scrollbar-thumb-yellow-300 hover:scrollbar-thumb-yellow-500">
+                    <div class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
+                        <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+                            <div>
+                                <label for="matiere" class="label-control">Matière</label>
+                                <select id="matiere" class="input-control" formControlName="matiere">
+                                    <option *ngFor="let subject of subjects" [value]="subject['_id']">{{ subject['libelle'] }}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="salle" class="label-control">Salle</label>
+                                <select id="salle" class="input-control" formControlName="salle">
+                                    <option *ngFor="let classroom of classrooms" [value]="classroom['_id']">{{ classroom['libelle'] }}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="color" class="label-control">Couleur</label>
+                                <input [(colorPicker)]="color" id="color" class="input-control" formControlName="couleur" (colorPickerChange)="setCouleur()">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+                            <nz-form-item class="grid">
+                                <label for="" class="label-control">Début du cours</label>
+                                <nz-form-control>
+                                    <nz-date-picker class="input-control" nzShowTime formControlName="debut" nzAllowClear="true"></nz-date-picker>
+                                </nz-form-control>
+                            </nz-form-item>
+                            <nz-form-item class="grid">
+                                <label for="" class="label-control">Fin du cours</label>
+                                <nz-form-control>
+                                    <nz-date-picker class="input-control" nzShowTime formControlName="fin" nzAllowClear="true"></nz-date-picker>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200">
+                    <button type="button" class="btn-yellow rounded disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmit()">Ajouter</button>
+                    <button type="button" class="btn-default rounded" (click)="onToggleModal()">Annuler</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

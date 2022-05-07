@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  faCalendarAlt,
-  faEdit,
-  faEye,
-  faLaptop,
-  faPlus,
-  faPlusCircle,
-  faStar,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { CalendarOptions } from '@fullcalendar/angular';
+import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
+import { ClassroomService } from 'src/app/core/services/classroom.service';
+import { EventService } from 'src/app/core/services/event.service';
+import { SubjectService } from 'src/app/core/services/subject.service';
 
 @Component({
   selector: 'app-timetable',
@@ -17,62 +14,18 @@ import { CalendarOptions } from '@fullcalendar/angular';
   styleUrls: ['./timetable.component.scss'],
 })
 export class TimetableComponent {
-  faLaptop = faLaptop;
-  addIcon = faPlusCircle;
-  calendarIcon = faCalendarAlt;
-  showIcon = faEye;
+  faAdd = faAdd;
+  timetableForm: FormGroup;
+  data: Date;
+  toggleModal: boolean;
 
-  allEvents = [
-    {
-      title: 'Cours réseau',
-      start: '2022-04-11 08:00:00',
-      end: '2022-04-11 10:00:00',
-      backgroundColor: '#839c49',
-    },
-    {
-      title: 'Cours Python',
-      start: '2022-04-11 15:00:00',
-      end: '2022-04-11 17:00:00',
-    },
-    {
-      title: 'Cours JavaScript',
-      start: '2022-04-13 15:00:00',
-      end: '2022-04-13 17:00:00',
-      teacher: 'M. DIOP',
-      classroom: 'S13',
-    },
-    {
-      title: 'Cours Marketing',
-      start: '2022-04-14 08:00:00',
-      end: '2022-04-14 10:00:00',
-    },
-  ];
-
-  subjects = [
-    {
-      name: 'Matiere 1',
-      background: 'bg-blue-500',
-    },
-    {
-      name: 'Matiere 2',
-      background: 'bg-yellow-500',
-    },
-    {
-      name: 'Matiere 3',
-      background: 'bg-green-500',
-    },
-    {
-      name: 'Matiere 4',
-      background: 'bg-purple-500',
-    },
-    {
-      name: 'Matiere 4',
-      background: 'bg-slate-500',
-    },
-  ];
+  events!: object[];
+  formatEvents: object[] = [];
+  subjects!: object[];
+  classrooms!: object[];
 
   calendarOptions: CalendarOptions = {
-    initialView: 'timeGridWeek',
+    initialView: 'dayGridDay',
     locale: 'fr',
     firstDay: 1,
     headerToolbar: {
@@ -87,9 +40,11 @@ export class TimetableComponent {
       day: 'Jour',
       list: 'Liste',
     },
-    events: this.allEvents,
+    dayHeaderFormat: { weekday: 'short' },
+    allDaySlot: false,
     nowIndicator: true,
     editable: true,
+    height: '500px',
     eventDrop: (infos) => {
       if (!confirm('Etes vous sûr.e de vouloir déplacer cet évènement ?')) {
         infos.revert();
@@ -99,18 +54,107 @@ export class TimetableComponent {
       console.log(infos.event.end);
     },
     eventClick: (infos) => {
-      alert(infos.event.title);
+      // alert(infos.event.title);
     },
     dateClick: (infos) => {
-      alert(infos.date);
+      // alert(infos.date);
+      this.data = infos.date;
+      this.onToggleModal();
     },
   };
 
-  constructor() {}
+  color: string;
 
-  ngOnInit(): void {}
+  constructor(
+    private eventService: EventService,
+    private subjectService: SubjectService,
+    private classroomService: ClassroomService,
+    private toastr: ToastrService
+  ) {}
 
-  onGetBg(bg: string) {
-    console.log(bg);
+  ngOnInit(): void {
+    this.toggleModal = false;
+    this.timetableForm = new FormGroup({
+      matiere: new FormControl('', Validators.required),
+      couleur: new FormControl('', Validators.required),
+      salle: new FormControl('', Validators.required),
+      debut: new FormControl('', Validators.required),
+      fin: new FormControl('', Validators.required),
+    });
+
+    this.getEvents();
+    this.getSubjects();
+    this.getClassrooms();
+  }
+
+  get matiere() {
+    return this.timetableForm.get('matiere');
+  }
+
+  setCouleur() {
+    this.couleur.setValue(this.color);
+  }
+
+  get couleur() {
+    return this.timetableForm.get('couleur');
+  }
+
+  get salle() {
+    return this.timetableForm.get('salle');
+  }
+
+  get debut() {
+    return this.timetableForm.get('debut');
+  }
+
+  get fin() {
+    return this.timetableForm.get('fin');
+  }
+
+  onToggleModal() {
+    this.toggleModal = !this.toggleModal;
+  }
+
+  onSubmit() {
+    const data = this.timetableForm.value;
+    this.eventService.addNewSlot(data).subscribe(() => {
+      this.getEvents();
+      this.onToggleModal();
+      this.toastr.success('Créneau ajouté !');
+    });
+  }
+
+  getEvents() {
+    this.eventService.getAllEvent().subscribe((response) => {
+      if (response.message) {
+        this.toastr.info(response.message);
+      } else {
+        response.payload.forEach((el) => {
+          this.formatEvents.push({
+            title: el['matiere'].libelle,
+            start: el['debut'],
+            end: el['fin'],
+            color: el['couleur'],
+          });
+        });
+        this.calendarOptions.events = this.formatEvents
+      }
+    });
+  }
+
+  getSubjects() {
+    this.subjectService.getAllSubject().subscribe((response) => {
+      if (!response.message) {
+        this.subjects = response.payload;
+      }
+    });
+  }
+
+  getClassrooms() {
+    this.classroomService.getAllClassroom().subscribe((response) => {
+      if (!response.message) {
+        this.classrooms = response.payload;
+      }
+    });
   }
 }

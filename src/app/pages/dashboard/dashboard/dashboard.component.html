@@ -1,18 +1,26 @@
 <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-    <div *ngFor="let content of topCardContent" class="relative sm:w-full mt-6 pb-2 bg-white drop-shadow-lg rounded">
-        <div class="absolute -top-6 left-4 h-20 w-[76px] rounded flex justify-center items-center text-white text-2xl drop-shadow-lg" [class]="content.badge">
-            <span><fa-icon [icon]="content.icon"></fa-icon></span>
-        </div>
-        <div class="float-right mr-4 mt-4 mb-4 flex flex-col items-end">
-            <span class="opacity-90">{{ content.title }}</span>
-            <span class="text-2xl font-medium">{{ content.count }}</span>
-        </div>
-        <div class="border border-gray-200 clear-both"></div>
-        <div class="mt-2 ml-4">
-            <a>
-                <span class="mr-2 opacity-90"><fa-icon [icon]="rightPoint"></fa-icon></span>
-                <span>{{ content.more }}</span>
-            </a>
-        </div>
+  <div
+    *ngFor="let content of topCardContent"
+    class="relative sm:w-full mt-6 pb-2 bg-white drop-shadow-lg rounded"
+  >
+    <div
+      class="absolute -top-6 left-4 h-20 w-[76px] rounded flex justify-center items-center text-white text-2xl drop-shadow-lg"
+      [class]="content.badge"
+    >
+      <fa-icon [icon]="content.icon"></fa-icon>
     </div>
+    <div class="float-right mr-4 mt-4 mb-4 flex flex-col items-end">
+      <span class="opacity-90">{{ content.title }}</span>
+      <span class="text-2xl font-medium">{{ content.count }}</span>
+    </div>
+    <div class="border border-gray-200 clear-both"></div>
+    <div class="mt-2 ml-4">
+      <a
+        class="flex justify-start items-center space-x-2 hover:text-yellow-500"
+      >
+        <fa-icon [icon]="faAnglesRight"></fa-icon>
+        <span class="opacity-90">{{ content.more }}</span>
+      </a>
+    </div>
+  </div>
 </div>

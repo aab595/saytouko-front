@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
-  faEdit,
+  faAdd,
+  faAngleRight,
   faGraduationCap,
   faLaptop,
-  faPlus,
-  faTrash,
-  faXmark,
+  faPenToSquare,
+  faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { map, Observable } from 'rxjs';
 import { LevelService } from 'src/app/core/services/level.service';
 
 @Component({
@@ -16,40 +19,72 @@ import { LevelService } from 'src/app/core/services/level.service';
   styleUrls: ['./level.component.scss'],
 })
 export class LevelComponent implements OnInit {
-  levelIcon = faGraduationCap;
   faLaptop = faLaptop;
-  addIcon = faPlus;
-  editIcon = faEdit;
-  deleteIcon = faTrash;
-  crossIcon = faXmark;
+  faAngleRight = faAngleRight;
+  faAdd = faAdd;
+  faGraduationCap = faGraduationCap;
+  faPenToSquare = faPenToSquare;
+  faTrashCan = faTrashCan;
+
   levels$!: Observable<any>;
+  addLevelForm!: FormGroup;
+  toggleAddModal!: boolean;
 
-  overlay!: HTMLDivElement;
-  showBtn!: HTMLButtonElement;
-  closeModal!: HTMLButtonElement;
-
-  constructor(private levelService: LevelService) {}
+  constructor(
+    private levelService: LevelService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.levels$ = this.levelService.getAllLevel();
-    this.levels$.subscribe((res) => console.log(res));
+    this.levels$ = this.levelService.getAllLevel().pipe(
+      map((res) => {
+        return res.payload;
+      })
+    );
 
-    this.overlay = document.querySelector('#overlay')!;
-    this.showBtn = document.querySelector('#showBtn')!;
-    this.closeModal = document.querySelector('#close-modal')!;
+    this.toggleAddModal = false;
 
-    const toggleModal = () => {
-      this.overlay.classList.toggle('hidden')
-      this.overlay.classList.toggle('flex')
-    }
-
-    this.showBtn.addEventListener('click', toggleModal);
-
-    this.closeModal.addEventListener('click', toggleModal);
+    this.addLevelForm = new FormGroup({
+      libelle: new FormControl('', Validators.required),
+      cycle: new FormControl('', Validators.required),
+      commentaire: new FormControl(''),
+    });
   }
 
-  toggleModal(): void {
-    document.querySelector('authentication-modal')?.classList.toggle('hidden');
-    document.querySelector('authentication-modal')?.classList.toggle('flex');
+  refreshLevels() {
+    this.levels$ = this.levelService.getAllLevel().pipe(
+      map((res) => {
+        return res.payload;
+      })
+    );
+  }
+
+  get libelle() {
+    return this.addLevelForm.get('libelle');
+  }
+
+  get cycle() {
+    return this.addLevelForm.get('cycle');
+  }
+
+  get commentaire() {
+    return this.addLevelForm.get('commentaire');
+  }
+
+  onSubmitLevel(): void {
+    const data = this.addLevelForm.value;
+    this.levelService.addNewLevel(data).subscribe(() => {
+      this.refreshLevels();
+      this.onCloseModal();
+      this.toastr.success('Niveau ajouté !');
+    });
+  }
+
+  onToggleAddModal() {
+    this.toggleAddModal = !this.toggleAddModal;
+  }
+
+  onCloseModal(): void {
+    this.toggleAddModal = false;
   }
 }

@@ -3,14 +3,26 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LevelService {
   private _baseUrl = 'http://localhost:3000/api/niveau';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getAllLevel(): Observable<any> {
-    return this.http.get(this._baseUrl)
+    return this.http.get(this._baseUrl);
+  }
+
+  public getLevelById(id: string): Observable<any> {
+    return this.http.get(`${this._baseUrl}/${id}`);
+  }
+
+  public addNewLevel(formData: any): Observable<any> {
+    return this.http.post(this._baseUrl, { ...formData });
+  }
+
+  public updateLevel(data: any, id: string): Observable<any> {
+    return this.http.put(`${this._baseUrl}/${id}`, data);
   }
 }

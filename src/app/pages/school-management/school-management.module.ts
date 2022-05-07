@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SchoolManagementRoutingModule } from './school-management-routing.module';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -21,6 +20,9 @@ import { SubjectComponent } from './subject/subject.component';
 import { StudentComponent } from './student/student.component';
 import { ParentComponent } from './parent/parent.component';
 import { TeacherComponent } from './teacher/teacher.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -35,8 +37,10 @@ import { TeacherComponent } from './teacher/teacher.component';
   imports: [
     CommonModule,
     SchoolManagementRoutingModule,
-    FontAwesomeModule,
     FullCalendarModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     LevelComponent,

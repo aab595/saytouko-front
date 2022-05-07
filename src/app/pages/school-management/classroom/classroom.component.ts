@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faBuildingUser, faLaptop } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-classroom',
@@ -7,8 +6,6 @@ import { faBuildingUser, faLaptop } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./classroom.component.scss'],
 })
 export class ClassroomComponent implements OnInit {
-  faLaptop = faLaptop;
-  classroomIcon = faBuildingUser;
 
   constructor() {}
 

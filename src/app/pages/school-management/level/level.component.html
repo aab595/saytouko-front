@@ -1,25 +1,14 @@
-<h1 class="bg-slate-200 py-4 rounded flex justify-between items-center">
-    <span class="text-2xl font-semibold">
-        <fa-icon [icon]="levelIcon"></fa-icon> Niveaux
-    </span>
-    <span>
-        <fa-icon [icon]="faLaptop"></fa-icon> Dashboard
-        <span class="opacity-80"> / Niveaux</span>
-    </span>
-</h1>
-
-<div class="border-2 border-slate-300 mb-[25px] rounded-full"></div>
-
 <div>
     <button
-        class="px-5 py-4 bg-yellow-400 opacity-90 rounded-full hover:cursor-pointer hover:opacity-100 font-medium shadow-2xl transition-all"
-        id="showBtn">
-        <fa-icon [icon]="addIcon"></fa-icon> Ajouter un niveau
+        class="btn-yellow rounded-full flex justify-center items-center space-x-1"
+        (click)="onToggleAddModal()">
+        <fa-icon [icon]="faAdd"></fa-icon>
+        <span>Ajouter un niveau</span>
     </button>
 </div>
 
-<div class="relative overflow-x-auto mt-[25px] pt-2 px-2">
-    <div class="flex justify-between">
+<div class="relative overflow-x-auto mt-[25px] pt-2">
+    <div class="flex flex-wrap justify-between gap-4 mb-2">
         <div class="flex gap-2 items-center mb-4">
             <span>Afficher</span>
             <select
@@ -50,10 +39,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">L1</td>
+            <tr class="bg-white border-b hover:bg-gray-50" *ngFor="let level of levels$ | async">
+                <td class="px-6 py-4">{{ level.libelle }}</td>
                 <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">Cycle 1</td>
+                <td class="px-6 py-4">{{ level.cycle }}</td>
                 <td class="px-6 py-4">
                     <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
                     <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
@@ -61,100 +50,10 @@
                 <td class="px-6 py-4">50</td>
                 <td class="px-6 py-4 flex gap-4 justify-center">
                     <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="editIcon"></fa-icon>
+                        <fa-icon [icon]="faPenToSquare"></fa-icon>
                     </button>
                     <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="deleteIcon"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">L1</td>
-                <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">Cycle 1</td>
-                <td class="px-6 py-4">
-                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
-                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
-                </td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4 flex gap-4 justify-center">
-                    <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="editIcon"></fa-icon>
-                    </button>
-                    <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="deleteIcon"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">L1</td>
-                <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">Cycle 1</td>
-                <td class="px-6 py-4">
-                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
-                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
-                </td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4 flex gap-4 justify-center">
-                    <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="editIcon"></fa-icon>
-                    </button>
-                    <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="deleteIcon"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">L1</td>
-                <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">Cycle 1</td>
-                <td class="px-6 py-4">
-                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
-                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
-                </td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4 flex gap-4 justify-center">
-                    <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="editIcon"></fa-icon>
-                    </button>
-                    <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="deleteIcon"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">L1</td>
-                <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">Cycle 1</td>
-                <td class="px-6 py-4">
-                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
-                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
-                </td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4 flex gap-4 justify-center">
-                    <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="editIcon"></fa-icon>
-                    </button>
-                    <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="deleteIcon"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">L1</td>
-                <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">Cycle 1</td>
-                <td class="px-6 py-4">
-                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
-                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
-                </td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4 flex gap-4 justify-center">
-                    <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="editIcon"></fa-icon>
-                    </button>
-                    <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                        <fa-icon [icon]="faTrashCan"></fa-icon>
                     </button>
                 </td>
             </tr>
@@ -162,8 +61,8 @@
     </table>
 </div>
 
-<!-- Main modal -->
-<div class="bg-black bg-opacity-50 h-[100vh] hidden justify-center items-center overflow-y-auto overflow-x-hidden fixed z-50 w-full inset-0 md:h-full" id="overlay">
+<!-- add level form modal -->
+<div *ngIf="toggleAddModal" class="bg-black bg-opacity-75 h-[100vh] flex justify-center items-center overflow-y-auto overflow-x-hidden fixed z-[1000] w-full inset-0 md:h-full">
     <div class="relative p-4 w-full max-w-4xl h-auto">
         <div class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
@@ -171,40 +70,107 @@
                 <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
                     Ajouter un niveau
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" id="close-modal">
+                <button type="button" (click)="onCloseModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                 </button>
             </div>
-            <!-- Modal body -->
-            <div class="p-6 space-y-6">
-                <form class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" action="#">
-                    <h3 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                    </div>
-                    <div class="flex justify-between">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required>
+            <form [formGroup]="addLevelForm">
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <div class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
+                        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+                            <div>
+                                <label for="level" class="label-control">Niveau</label>
+                                <input type="text" id="level" class="input-control" formControlName="libelle">
+                                <div *ngIf="libelle?.invalid && (libelle?.dirty || libelle?.touched)">
+                                    <div *ngIf="libelle?.errors?.['required']" class="text-red-500 text-xs">
+                                        Le champ `niveau` est obligatoire
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ml-3 text-sm">
-                            <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                            <div>
+                                <label for="password" class="label-control">Cycle</label>
+                                <select id="password" class="input-control" formControlName="cycle">
+                                    <option value="Cycle 1">Premier cylcle</option>
+                                    <option value="Cycle 2">Deuxième cylcle</option>
+                                    <option value="Cycle 3">Troisième cylcle</option>
+                                </select>
+                                <div *ngIf="cycle?.invalid && (cycle?.dirty || cycle?.touched)">
+                                    <div *ngIf="cycle?.errors?.['required']" class="text-red-500 text-xs">
+                                        Le champ `cycle` est obligatoire
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                        <div>
+                            <label for="comment" class="label-control">Commentaire</label>
+                            <textarea id="comment" cols="30" rows="3" class="input-control" formControlName="commentaire"></textarea>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
-            </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <button type="button" class="btn-yellow rounded-lg disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmitLevel()" [disabled]="addLevelForm.invalid">Ajouter</button>
+                    <button type="button" class="btn-default rounded-lg" (click)="onCloseModal()">Annuler</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<!-- update level form modal -->
+<!-- <div *ngIf="toggleUpdateModal" class="bg-black bg-opacity-75 h-[100vh] flex justify-center items-center overflow-y-auto overflow-x-hidden fixed z-[1000] w-full inset-0 md:h-full">
+    <div class="relative p-4 w-full max-w-4xl h-auto">
+        <div class="relative bg-white rounded-lg shadow"> -->
+            <!-- Modal header -->
+            <!-- <div class="flex justify-between items-start p-5 rounded-t border-b">
+                <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
+                    Mettre à jour le niveau
+                </h3>
+                <button type="button" (click)="onCloseUpdateModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <form [formGroup]="updateLevelForm"> -->
+                <!-- Modal body -->
+                <!-- <div class="p-6 space-y-6">
+                    <div class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
+                        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+                            <div>
+                                <label for="level" class="label-control">Niveau</label>
+                                <input type="text" id="level" class="input-control" formControlName="libelle" [value]="level.libelle">
+                                <div *ngIf="libelle?.invalid && (libelle?.dirty || libelle?.touched)">
+                                    <div *ngIf="libelle?.errors?.['required']" class="text-red-500 text-xs">
+                                        Le champ `niveau` est obligatoire
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="password" class="label-control">Cycle</label>
+                                <select id="password" class="input-control" formControlName="cycle">
+                                    <option value="Cycle 1">Premier cylcle</option>
+                                    <option value="Cycle 2">Deuxième cylcle</option>
+                                    <option value="Cycle 3">Troisième cylcle</option>
+                                </select>
+                                <div *ngIf="cycle?.invalid && (cycle?.dirty || cycle?.touched)">
+                                    <div *ngIf="cycle?.errors?.['required']" class="text-red-500 text-xs">
+                                        Le champ `cycle` est obligatoire
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="comment" class="label-control">Commentaire</label>
+                            <textarea id="comment" cols="30" rows="3" class="input-control" formControlName="commentaire"></textarea>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Modal footer -->
+                <!-- <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <button type="button" class="btn-yellow rounded-lg disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmitLevel()" [disabled]="addLevelForm.invalid">Ajouter</button>
+                    <button type="button" class="btn-default rounded-lg" (click)="onCloseUpdateModal()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->

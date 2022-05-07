@@ -1,26 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
-  faArrowRight,
+  faAnglesRight,
   faSignalPerfect,
-  faBuildingUser,
   faUserAlt,
-  faUserGraduate,
+  faUsers,
+  faUserTie,
 } from '@fortawesome/free-solid-svg-icons';
-import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
-  faLaptop = faLaptop;
-  rightPoint = faArrowRight;
-
+export class DashboardComponent implements OnInit {
+  faAnglesRight = faAnglesRight;
   topCardContent = [
     {
       badge: 'bg-pink-600',
-      icon: faUserGraduate,
+      icon: faUsers,
       title: 'Elèves',
       count: 200,
       more: 'Consulter les élèves',
@@ -34,8 +32,8 @@ export class DashboardComponent {
     },
     {
       badge: 'bg-orange-600',
-      icon: faBuildingUser,
-      title: 'Enseignant',
+      icon: faUserTie,
+      title: 'Enseignants',
       count: 20,
       more: 'Consulter les enseignants',
     },
@@ -47,4 +45,10 @@ export class DashboardComponent {
       more: 'Consulter les utilisateurs',
     },
   ];
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
+    //
+  }
 }
