@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
 import { ClassroomService } from 'src/app/core/services/classroom.service';
 import { EventService } from 'src/app/core/services/event.service';
 import { SubjectService } from 'src/app/core/services/subject.service';

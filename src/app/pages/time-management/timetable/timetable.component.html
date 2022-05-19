@@ -99,16 +99,31 @@
                                 <select id="matiere" class="input-control" formControlName="matiere">
                                     <option *ngFor="let subject of subjects" [value]="subject['_id']">{{ subject['libelle'] }}</option>
                                 </select>
+                                <div *ngIf="matiere?.invalid && (matiere?.dirty || matiere?.touched)">
+                                    <div *ngIf="matiere?.errors?.['required']" class="text-red-500 text-xs">
+                                        `matière` est obligatoire
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label for="salle" class="label-control">Salle</label>
                                 <select id="salle" class="input-control" formControlName="salle">
                                     <option *ngFor="let classroom of classrooms" [value]="classroom['_id']">{{ classroom['libelle'] }}</option>
                                 </select>
+                                <div *ngIf="salle?.invalid && (salle?.dirty || salle?.touched)">
+                                    <div *ngIf="salle?.errors?.['required']" class="text-red-500 text-xs">
+                                        `salle` est obligatoire
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label for="color" class="label-control">Couleur</label>
                                 <input [(colorPicker)]="color" id="color" class="input-control" formControlName="couleur" (colorPickerChange)="setCouleur()">
+                                <div *ngIf="couleur?.invalid && (couleur?.dirty || couleur?.touched)">
+                                    <div *ngIf="couleur?.errors?.['required']" class="text-red-500 text-xs">
+                                        `couleur` est obligatoire
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
@@ -117,19 +132,29 @@
                                 <nz-form-control>
                                     <nz-date-picker class="input-control" nzShowTime formControlName="debut" nzAllowClear="true"></nz-date-picker>
                                 </nz-form-control>
+                                <div *ngIf="debut?.invalid && (debut?.dirty || debut?.touched)">
+                                    <div *ngIf="debut?.errors?.['required']" class="text-red-500 text-xs">
+                                        `Date de début` est obligatoire
+                                    </div>
+                                </div>
                             </nz-form-item>
                             <nz-form-item class="grid">
                                 <label for="" class="label-control">Fin du cours</label>
                                 <nz-form-control>
                                     <nz-date-picker class="input-control" nzShowTime formControlName="fin" nzAllowClear="true"></nz-date-picker>
                                 </nz-form-control>
+                                <div *ngIf="fin?.invalid && (fin?.dirty || fin?.touched)">
+                                    <div *ngIf="fin?.errors?.['required']" class="text-red-500 text-xs">
+                                        `Date de fin` est obligatoire
+                                    </div>
+                                </div>
                             </nz-form-item>
                         </div>
                     </div>
                 </div>
                 <!-- Footer -->
                 <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                    <button type="button" class="btn-yellow rounded disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmit()">Ajouter</button>
+                    <button type="button" class="btn-yellow rounded disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmit()" [disabled]="timetableForm.invalid">Ajouter</button>
                     <button type="button" class="btn-default rounded" (click)="onToggleModal()">Annuler</button>
                 </div>
             </form>
