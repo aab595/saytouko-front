@@ -111,7 +111,8 @@
                         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
                             <div>
                                 <label for="classes" class="label-control">Classes</label>
-                                <input type="text" id="classes" class="input-control" formControlName="classes">
+                                <!-- <input type="text" id="classes" class="input-control" formControlName="classes"> -->
+                                <ng-select2 [data]="exampleData" formControlName="classes"></ng-select2>
                             </div>
                             <div>
                                 <label for="dateNaiss" class="label-control">Date de naissance</label>

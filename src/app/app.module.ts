@@ -12,7 +12,11 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { CoreModule } from './core/core.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { faAngleRight, faAdd } from '@fortawesome/free-solid-svg-icons';
 
 registerLocaleData(fr);
 
@@ -26,9 +30,13 @@ registerLocaleData(fr);
     NzLayoutModule,
     NzMenuModule,
     NzBreadCrumbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: fr_FR }, Title],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faAngleRight, faAdd);
+  }
+}

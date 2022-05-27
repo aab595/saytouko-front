@@ -5,6 +5,7 @@ import {
   faPenToSquare,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
+import { Select2OptionData } from 'ng-select2';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
 import { TeacherService } from 'src/app/core/services/teacher.service';
@@ -22,6 +23,8 @@ export class TeacherComponent implements OnInit {
   addTeacherForm!: FormGroup;
   teachers$!: Observable<any>;
 
+  exampleData: Array<Select2OptionData>;
+
   constructor(
     private teacherService: TeacherService,
     private toastr: ToastrService
@@ -33,6 +36,18 @@ export class TeacherComponent implements OnInit {
         return data.payload;
       })
     );
+
+    this.exampleData = [
+      {
+        id: 'basic1',
+        text: 'Basic 1',
+      },
+      {
+        id: 'basic2',
+        disabled: true,
+        text: 'Basic 2',
+      },
+    ];
     this.toggleAddModal = false;
     this.addTeacherForm = new FormGroup({
       nom: new FormControl('', Validators.required),

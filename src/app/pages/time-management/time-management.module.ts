@@ -39,7 +39,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     NzFormModule,
     NzDatePickerModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    ColorPickerModule,
   ],
   exports: [
     TimetableComponent,

@@ -6,9 +6,21 @@ import { TimetableComponent } from './timetable/timetable.component';
 import { VacationComponent } from './vacation/vacation.component';
 
 const routes: Routes = [
-  { path: 'timetable', component: TimetableComponent, data: { title: 'Emploi du temps' } },
-  { path: 'textbook', component: TextbookComponent, data: { title: 'Cahier de texte' } },
-  { path: 'presence', component: PresenceComponent, data: { title: 'Liste de présence' } },
+  {
+    path: 'timetable',
+    component: TimetableComponent,
+    data: { title: 'Emploi du temps' },
+  },
+  {
+    path: 'textbook',
+    component: TextbookComponent,
+    data: { title: 'Cahier de texte' },
+  },
+  {
+    path: 'presence',
+    component: PresenceComponent,
+    data: { title: 'Liste de présence' },
+  },
   { path: 'vacation', component: VacationComponent, data: { title: 'Congès' } },
 ];
 

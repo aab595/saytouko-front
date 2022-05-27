@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   faAnglesRight,
@@ -46,9 +46,7 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    //
-  }
+  ngOnInit(): void {}
 }

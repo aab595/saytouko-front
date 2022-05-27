@@ -24,7 +24,7 @@ export class TimetableComponent {
   classrooms!: object[];
 
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridDay',
+    initialView: 'dayGridMonth',
     locale: 'fr',
     firstDay: 1,
     headerToolbar: {
@@ -41,9 +41,9 @@ export class TimetableComponent {
     },
     dayHeaderFormat: { weekday: 'short' },
     allDaySlot: false,
+    dayMaxEventRows: true,
     nowIndicator: true,
     editable: true,
-    height: '500px',
     eventDrop: (infos) => {
       if (!confirm('Etes vous sûr.e de vouloir déplacer cet évènement ?')) {
         infos.revert();
@@ -136,7 +136,7 @@ export class TimetableComponent {
             color: el['couleur'],
           });
         });
-        this.calendarOptions.events = this.formatEvents
+        this.calendarOptions.events = this.formatEvents;
       }
     });
   }

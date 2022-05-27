@@ -1,176 +1,184 @@
 <div>
-    <button
-        class="btn-yellow rounded-full flex justify-center items-center space-x-1"
-        (click)="onToggleAddModal()">
-        <fa-icon [icon]="faAdd"></fa-icon>
-        <span>Ajouter un niveau</span>
-    </button>
+  <button
+    class="btn-yellow rounded-full flex justify-center items-center space-x-1"
+    (click)="onToggleAddModal()"
+  >
+    <fa-icon [icon]="['fas', 'add']"></fa-icon>
+    <span>Ajouter un niveau</span>
+  </button>
 </div>
 
 <div class="relative overflow-x-auto mt-[25px] pt-2">
-    <div class="flex flex-wrap justify-between gap-4 mb-2">
-        <div class="flex gap-2 items-center mb-4">
-            <span>Afficher</span>
-            <select
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5 w-16">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span>éléments</span>
-        </div>
-        <div>
-            <span>Rechercher : </span>
-            <input type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5">
-        </div>
+  <div class="flex flex-wrap justify-between gap-4 mb-2">
+    <div class="flex gap-2 items-center mb-4">
+      <span>Afficher</span>
+      <select
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5 w-16"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      <span>éléments</span>
     </div>
-    <table class="w-full text-sm text-left shadow-md text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">Niveau</th>
-                <th scope="col" class="px-6 py-3">Désignation</th>
-                <th scope="col" class="px-6 py-3">Cycle</th>
-                <th scope="col" class="px-6 py-3">Classes</th>
-                <th scope="col" class="px-6 py-3">Etudiants du niveau</th>
-                <th scope="col" class="px-6 py-3 text-center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="bg-white border-b hover:bg-gray-50" *ngFor="let level of levels$ | async">
-                <td class="px-6 py-4">{{ level.libelle }}</td>
-                <td class="px-6 py-4">Droit public</td>
-                <td class="px-6 py-4">{{ level.cycle }}</td>
-                <td class="px-6 py-4">
-                    <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
-                    <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
-                </td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4 flex gap-4 justify-center">
-                    <button class="text-blue-500 text-xl" title="Modifier">
-                        <fa-icon [icon]="faPenToSquare"></fa-icon>
-                    </button>
-                    <button class="text-red-500 text-xl" title="Supprimer">
-                        <fa-icon [icon]="faTrashCan"></fa-icon>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+      <span>Rechercher : </span>
+      <input
+        type="text"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 p-2.5"
+      />
+    </div>
+  </div>
+  <table class="w-full text-sm text-left shadow-md text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-3">Niveau</th>
+        <th scope="col" class="px-6 py-3">Désignation</th>
+        <th scope="col" class="px-6 py-3">Cycle</th>
+        <th scope="col" class="px-6 py-3">Classes</th>
+        <th scope="col" class="px-6 py-3">Etudiants du niveau</th>
+        <th scope="col" class="px-6 py-3 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b hover:bg-gray-50"
+        *ngFor="let level of levels$ | async"
+      >
+        <td class="px-6 py-4">{{ level.libelle }}</td>
+        <td class="px-6 py-4">Droit public</td>
+        <td class="px-6 py-4">{{ level.cycle }}</td>
+        <td class="px-6 py-4">
+          <span class="bg-yellow-400 text-black rounded-md mr-2 p-1">DP1</span>
+          <span class="bg-yellow-400 text-black rounded-md p-1">DP2</span>
+        </td>
+        <td class="px-6 py-4">50</td>
+        <td class="px-6 py-4 flex gap-4 justify-center">
+          <button class="text-blue-500 text-xl" title="Modifier">
+            <fa-icon [icon]="faPenToSquare"></fa-icon>
+          </button>
+          <button class="text-red-500 text-xl" title="Supprimer">
+            <fa-icon [icon]="faTrashCan"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- add level form modal -->
-<div *ngIf="toggleAddModal" class="bg-black bg-opacity-75 h-[100vh] flex justify-center items-center overflow-y-auto overflow-x-hidden fixed z-[1000] w-full inset-0 md:h-full">
-    <div class="relative p-4 w-full max-w-4xl h-auto">
-        <div class="relative bg-white rounded-lg shadow">
-            <!-- Modal header -->
-            <div class="flex justify-between items-start p-5 rounded-t border-b">
-                <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
-                    Ajouter un niveau
-                </h3>
-                <button type="button" (click)="onCloseModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                </button>
+<div
+  *ngIf="toggleAddModal"
+  class="bg-black bg-opacity-75 h-[100vh] flex justify-center items-center overflow-y-auto overflow-x-hidden fixed z-[1000] w-full inset-0 md:h-full"
+>
+  <div class="relative p-4 w-full max-w-4xl h-auto">
+    <div class="relative bg-white rounded-lg shadow">
+      <!-- Modal header -->
+      <div class="flex justify-between items-start p-5 rounded-t border-b">
+        <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
+          Ajouter un niveau
+        </h3>
+        <button
+          type="button"
+          (click)="onCloseModal()"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <form [formGroup]="addLevelForm">
+        <!-- Modal body -->
+        <div class="p-6 space-y-6">
+          <div class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
+            <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+              <div>
+                <label for="level" class="label-control">Niveau</label>
+                <input
+                  type="text"
+                  id="level"
+                  class="input-control"
+                  formControlName="libelle"
+                />
+                <div
+                  *ngIf="
+                    libelle?.invalid && (libelle?.dirty || libelle?.touched)
+                  "
+                >
+                  <div
+                    *ngIf="libelle?.errors?.['required']"
+                    class="text-red-500 text-xs"
+                  >
+                    Le champ `niveau` est obligatoire
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="password" class="label-control">Cycle</label>
+                <select
+                  id="password"
+                  class="input-control"
+                  formControlName="cycle"
+                >
+                  <option value="Cycle 1">Premier cylcle</option>
+                  <option value="Cycle 2">Deuxième cylcle</option>
+                  <option value="Cycle 3">Troisième cylcle</option>
+                </select>
+                <div *ngIf="cycle?.invalid && (cycle?.dirty || cycle?.touched)">
+                  <div
+                    *ngIf="cycle?.errors?.['required']"
+                    class="text-red-500 text-xs"
+                  >
+                    Le champ `cycle` est obligatoire
+                  </div>
+                </div>
+              </div>
             </div>
-            <form [formGroup]="addLevelForm">
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <div class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
-                        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
-                            <div>
-                                <label for="level" class="label-control">Niveau</label>
-                                <input type="text" id="level" class="input-control" formControlName="libelle">
-                                <div *ngIf="libelle?.invalid && (libelle?.dirty || libelle?.touched)">
-                                    <div *ngIf="libelle?.errors?.['required']" class="text-red-500 text-xs">
-                                        Le champ `niveau` est obligatoire
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="password" class="label-control">Cycle</label>
-                                <select id="password" class="input-control" formControlName="cycle">
-                                    <option value="Cycle 1">Premier cylcle</option>
-                                    <option value="Cycle 2">Deuxième cylcle</option>
-                                    <option value="Cycle 3">Troisième cylcle</option>
-                                </select>
-                                <div *ngIf="cycle?.invalid && (cycle?.dirty || cycle?.touched)">
-                                    <div *ngIf="cycle?.errors?.['required']" class="text-red-500 text-xs">
-                                        Le champ `cycle` est obligatoire
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="comment" class="label-control">Commentaire</label>
-                            <textarea id="comment" cols="30" rows="3" class="input-control" formControlName="commentaire"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button type="button" class="btn-yellow rounded-lg disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmitLevel()" [disabled]="addLevelForm.invalid">Ajouter</button>
-                    <button type="button" class="btn-default rounded-lg" (click)="onCloseModal()">Annuler</button>
-                </div>
-            </form>
+            <div>
+              <label for="comment" class="label-control">Commentaire</label>
+              <textarea
+                id="comment"
+                cols="30"
+                rows="3"
+                class="input-control"
+                formControlName="commentaire"
+              ></textarea>
+            </div>
+          </div>
         </div>
+        <!-- Modal footer -->
+        <div
+          class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600"
+        >
+          <button
+            type="button"
+            class="btn-yellow rounded-lg disabled:bg-yellow-200 disabled:cursor-not-allowed"
+            (click)="onSubmitLevel()"
+            [disabled]="addLevelForm.invalid"
+          >
+            Ajouter
+          </button>
+          <button
+            type="button"
+            class="btn-default rounded-lg"
+            (click)="onCloseModal()"
+          >
+            Annuler
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-
-<!-- update level form modal -->
-<!-- <div *ngIf="toggleUpdateModal" class="bg-black bg-opacity-75 h-[100vh] flex justify-center items-center overflow-y-auto overflow-x-hidden fixed z-[1000] w-full inset-0 md:h-full">
-    <div class="relative p-4 w-full max-w-4xl h-auto">
-        <div class="relative bg-white rounded-lg shadow"> -->
-            <!-- Modal header -->
-            <!-- <div class="flex justify-between items-start p-5 rounded-t border-b">
-                <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
-                    Mettre à jour le niveau
-                </h3>
-                <button type="button" (click)="onCloseUpdateModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                </button>
-            </div>
-            <form [formGroup]="updateLevelForm"> -->
-                <!-- Modal body -->
-                <!-- <div class="p-6 space-y-6">
-                    <div class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
-                        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
-                            <div>
-                                <label for="level" class="label-control">Niveau</label>
-                                <input type="text" id="level" class="input-control" formControlName="libelle" [value]="level.libelle">
-                                <div *ngIf="libelle?.invalid && (libelle?.dirty || libelle?.touched)">
-                                    <div *ngIf="libelle?.errors?.['required']" class="text-red-500 text-xs">
-                                        Le champ `niveau` est obligatoire
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="password" class="label-control">Cycle</label>
-                                <select id="password" class="input-control" formControlName="cycle">
-                                    <option value="Cycle 1">Premier cylcle</option>
-                                    <option value="Cycle 2">Deuxième cylcle</option>
-                                    <option value="Cycle 3">Troisième cylcle</option>
-                                </select>
-                                <div *ngIf="cycle?.invalid && (cycle?.dirty || cycle?.touched)">
-                                    <div *ngIf="cycle?.errors?.['required']" class="text-red-500 text-xs">
-                                        Le champ `cycle` est obligatoire
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="comment" class="label-control">Commentaire</label>
-                            <textarea id="comment" cols="30" rows="3" class="input-control" formControlName="commentaire"></textarea>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Modal footer -->
-                <!-- <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button type="button" class="btn-yellow rounded-lg disabled:bg-yellow-200 disabled:cursor-not-allowed" (click)="onSubmitLevel()" [disabled]="addLevelForm.invalid">Ajouter</button>
-                    <button type="button" class="btn-default rounded-lg" (click)="onCloseUpdateModal()">Annuler</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
