@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LevelService {
-  private _baseUrl = 'http://localhost:3000/api/niveau';
+  private _baseUrl = 'https://saytoukoapi.herokuapp.com/api/niveau';
 
   constructor(private http: HttpClient) {}
 

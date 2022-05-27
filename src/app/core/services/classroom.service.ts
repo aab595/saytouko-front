@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class ClassroomService {
-    private _baseUrl = 'http://localhost:3000/api/salle';
+    private _baseUrl = 'https://saytoukoapi.herokuapp.com/api/salle';
 
     constructor(private http: HttpClient) {}
   

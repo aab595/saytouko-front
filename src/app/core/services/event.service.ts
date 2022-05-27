@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EventService {
-  private _baseUrl = 'http://localhost:3000/api/event';
+  private _baseUrl = 'https://saytoukoapi.herokuapp.com/api/event';
 
   constructor(private http: HttpClient) {}
 

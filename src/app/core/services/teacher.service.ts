@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class TeacherService {
-    private _baseUrl = 'http://localhost:3000/api/enseignant';
+    private _baseUrl = 'https://saytoukoapi.herokuapp.com/api/enseignant';
 
     constructor(private http: HttpClient) {}
   
