@@ -17,6 +17,7 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import { faAngleRight, faAdd } from '@fortawesome/free-solid-svg-icons';
+import { NgChartsModule } from 'ng2-charts';
 
 registerLocaleData(fr);
 
@@ -31,6 +32,7 @@ registerLocaleData(fr);
     NzMenuModule,
     NzBreadCrumbModule,
     FontAwesomeModule,
+    NgChartsModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: fr_FR }, Title],
   bootstrap: [AppComponent],

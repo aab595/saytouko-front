@@ -1,11 +1,19 @@
 const express = require("express");
-const path = require("path");
 const app = express();
+const compression = require("compression");
+const cors = require("cors");
 
-app.use(express.static(__dirname + "/dist/saytouko-front"));
+// MIDDLEWARES
+app.use(compression());
+app.use(express.json());
+app.use(cors());
 
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname + "/dist/saytouko-front/index.html"));
+// Serve only the static files form the dist directory
+app.use(express.static(__dirname + '/dist'));
+
+// ROUTE
+app.get('/', function(req,res) {
+  res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(9000)
